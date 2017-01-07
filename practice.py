@@ -22,7 +22,32 @@ def isUnique(inputStr):
 def checkPermutation(strTup):
 	str1 = strTup[0]
 	str2 = strTup[1]
-	return str1
+	#naive soln: sort both strings and compare
+	return sorted(str1) == sorted(str2)
+	#alternately, count the character frequencies in the strings as you go
+
+#CURRENTLY DOESNT WORK
+#problem 1.3: replace all spaces in string with %20
+def URLify(inputTup):
+	inputStr = list(inputTup[0])
+	numChars = inputTup[1]
+	charsCounted = 0
+	curIndex = 0
+	while(charsCounted < numChars):
+		print curIndex
+		examine = inputStr[curIndex]
+		if examine == " ":
+			del inputStr[-1]
+			del inputStr[-1]
+			del inputStr[curIndex]
+			inputStr.insert(curIndex, "%")
+			inputStr.insert(curIndex, "2")
+			inputStr.insert(curIndex, "0")
+			curIndex += 3
+		else:
+			charsCounted += 1
+			curIndex += 1
+	return "".join(inputStr)
 
 def tester(testSet, correctSet, soln):
 	for i in range(0, len(testSet)):
@@ -31,7 +56,7 @@ def tester(testSet, correctSet, soln):
 		print ("Passed" if result == correctSet[i] else "Failed") + '	' + soln.__name__ +'("' + str(test) + '")=' + str(soln(test))
 
 def main():
-	testSet = [("cats", "stac"), ("aaaa", "aaaa"), ("hello", "yellow"), ("blaand", "alband"), ("rover", "overr")]
-	correctSet = [True, True, False, True, True]
-	tester(testSet, correctSet, checkPermutation)
+	testSet = [("ab cde  ", 5), ("Mr John Smith    ", 13), ("welcome", 7), ("hello hello  ", 10)]
+	correctSet = ["ab%20cde", "Mr%20John%20Smith", "welcome", "hello%20hello"]
+	tester(testSet, correctSet, URLify)
 main()
