@@ -18,14 +18,20 @@ def isUnique(inputStr):
 			return False
 	return True
 
-def isUniqueTest():
-	testSet = ["hello", "abcde", "ijoeqpo", "aac", ""]
-	correctSet = [False, True, False, False, True]
+#problem 1.2: check if one string is a permutation of another
+def checkPermutation(strTup):
+	str1 = strTup[0]
+	str2 = strTup[1]
+	return str1
+
+def tester(testSet, correctSet, soln):
 	for i in range(0, len(testSet)):
 		test = testSet[i]
-		result = isUnique(test)
-		print ("Passed" if result == correctSet[i] else "Failed") + '	isUnique("' + test + '")=' + str(isUnique(test))
+		result = soln(test)
+		print ("Passed" if result == correctSet[i] else "Failed") + '	' + soln.__name__ +'("' + str(test) + '")=' + str(soln(test))
 
 def main():
-	isUniqueTest()
+	testSet = [("cats", "stac"), ("aaaa", "aaaa"), ("hello", "yellow"), ("blaand", "alband"), ("rover", "overr")]
+	correctSet = [True, True, False, True, True]
+	tester(testSet, correctSet, checkPermutation)
 main()
