@@ -51,11 +51,10 @@ def URLify(inputTup):
 
 #problem from Russell: reverse a linked list
 def reverseDeque(dequeObj):
+	localDeque = dequeObj
 	newDequeObj = deque()
-	while dequeObj:
-		x = dequeObj.pop()
-		print x
-		newDequeObj.append(x)
+	newDequeObj.extendleft(localDeque)
+	print newDequeObj
 	return newDequeObj
 
 def tester(testSet, correctSet, soln):
