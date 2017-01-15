@@ -1,4 +1,4 @@
-
+from collections import deque
 #problem 1.1: check if a string has all unique chararcters
 def isUnique(inputStr):
 	'''
@@ -49,6 +49,15 @@ def URLify(inputTup):
 			curIndex += 1
 	return "".join(inputStr)
 
+#problem from Russell: reverse a linked list
+def reverseDeque(dequeObj):
+	newDequeObj = deque()
+	while dequeObj:
+		x = dequeObj.pop()
+		print x
+		newDequeObj.append(x)
+	return newDequeObj
+
 def tester(testSet, correctSet, soln):
 	for i in range(0, len(testSet)):
 		test = testSet[i]
@@ -56,7 +65,7 @@ def tester(testSet, correctSet, soln):
 		print ("Passed" if result == correctSet[i] else "Failed") + '	' + soln.__name__ +'("' + str(test) + '")=' + str(soln(test))
 
 def main():
-	testSet = [("ab cde  ", 5), ("Mr John Smith    ", 13), ("welcome", 7), ("hello hello  ", 10)]
-	correctSet = ["ab%20cde", "Mr%20John%20Smith", "welcome", "hello%20hello"]
-	tester(testSet, correctSet, URLify)
+	testSet = [deque([1,2,3,4])]
+	correctSet = [deque([4,3,2,1])]
+	tester(testSet, correctSet, reverseDeque)
 main()
