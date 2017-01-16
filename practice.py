@@ -57,6 +57,32 @@ def reverseDeque(dequeObj):
 	print newDequeObj
 	return newDequeObj
 
+#problem from Russell: convert number into word
+def convertLessThanThousand(inputInt):
+	oneDict = {1:"one", 2:"two", 3:"three", 4:"four", 5:"five", 6:"six", 7:"seven", 8:"eight", 9:"nine"}
+	tensDict = {2:"twenty", 3:"thirty", 4:"fourty", 5:"fifty", 6:"sixty", 7:"seventy", 8:"eighty", 9:"ninety"}
+	teensDict = {10:"ten", 11:"eleven", 12:"twelve", 13:"thirteen", 14:"fourteen", 15:"fifteen", 16:"sixteen", 17:"seventeen", 18:"eighteen", 19:"nineteen"}
+	outputString = ""
+	if inputInt >= 100:
+		outputString = outputString + oneDict[inputInt/100] + " hundred "
+		inputInt = inputInt % 100
+	if inputInt >= 20:
+		outputString = outputString + tensDict[inputInt/10] + " "
+		inputInt = inputInt % 10
+	if inputInt >= 10:
+		outputString = outputString + teensDict[inputInt] + " "
+		inputInt = inputInt % 10
+	if inputInt >= 1:
+		outputString = outputString + oneDict[inputInt]
+	return outputString
+def convertNumberIntoWord(inputInt):
+	outputString = ""
+	if inputInt >= 1000:
+		return convertLessThanThousand(inputInt/1000) + "thousand " + convertLessThanThousand(inputInt % 1000)
+	else:
+		return convertLessThanThousand(inputInt)
+
+
 def tester(testSet, correctSet, soln):
 	for i in range(0, len(testSet)):
 		test = testSet[i]
@@ -64,7 +90,7 @@ def tester(testSet, correctSet, soln):
 		print ("Passed" if result == correctSet[i] else "Failed") + '	' + soln.__name__ +'("' + str(test) + '")=' + str(soln(test))
 
 def main():
-	testSet = [deque([1,2,3,4])]
-	correctSet = [deque([4,3,2,1])]
-	tester(testSet, correctSet, reverseDeque)
+	testSet = [456, 30986]
+	correctSet = ["four hundred fifty six", "thirty thousand nine hundred eighty six"]
+	tester(testSet, correctSet, convertNumberIntoWord)
 main()
